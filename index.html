@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kiara Dating Application™</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="badge">Hivatalos jelentkezési portál</div>
+      <h1>Jelentkezz randira Kiarához.</h1>
+      <p class="lead">Töltsd ki az adatlapot, lőj egy élő szelfit, és az algoritmus megmondja, mennyi eséllyel kapsz választ.</p>
+
+      <div class="stats">
+        <div class="stat">
+          <strong id="waitingList">312</strong>
+          <span>pasi a waiting listen</span>
+        </div>
+        <div class="stat">
+          <strong>élő</strong>
+          <span>szelfi kötelező</span>
+        </div>
+        <div class="stat">
+          <strong>email</strong>
+          <span>jelentkezés elküldve</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="formCard">
+      <h2>Jelentkezési lap</h2>
+      <p class="muted">A beküldés után az adatok, a pontszám és a szelfi emailben mennek Kiarának.</p>
+
+      <form id="applicationForm">
+        <label>
+          Név
+          <input id="name" name="name" type="text" required placeholder="pl. Ádám" />
+        </label>
+
+        <div class="grid">
+          <label>
+            Életkor
+            <select id="age" name="age">
+              <option value="24">24 alatt</option>
+              <option value="27">24-27</option>
+              <option value="28" selected>28-38</option>
+              <option value="39">39-42</option>
+              <option value="43">43 fölött</option>
+            </select>
+          </label>
+
+          <label>
+            Magasság
+            <select id="height" name="height">
+              <option value="175">175 cm alatt</option>
+              <option value="180">180-184 cm</option>
+              <option value="185" selected>185+ cm</option>
+            </select>
+          </label>
+        </div>
+
+        <label>
+          Város
+          <select id="city" name="city">
+            <option value="Budapest" selected>Budapest</option>
+          </select>
+        </label>
+
+        <label>
+          Munkakör
+          <select id="profession" name="profession">
+            <option value="mernoki_informatikus" selected>Mérnöki informatikus</option>
+            <option value="vallalkozo">Vállalkozó</option>
+            <option value="penzugy">Pénzügy</option>
+            <option value="orvos">Orvos</option>
+            <option value="egyeb">Egyéb</option>
+          </select>
+        </label>
+
+        <label>
+          Személyiség
+          <select id="personality" name="personality">
+            <option value="outgoing" selected>Outgoing</option>
+            <option value="balanced">Vegyes</option>
+            <option value="homebody">Otthonülő</option>
+          </select>
+        </label>
+
+        <label>
+          Hobbik
+          <textarea id="hobbies" name="hobbies" rows="3" placeholder="pl. edzés, utazás, főzés"></textarea>
+        </label>
+
+        <label>
+          5 legjobb tulajdonságod
+          <textarea id="traits" name="traits" rows="3" placeholder="pl. intelligens, vicces, ambiciózus, figyelmes, magabiztos"></textarea>
+        </label>
+
+        <div class="selfieBox">
+          <div class="selfieHeader">
+            <div>
+              <strong>Élő szelfi</strong>
+              <p>Engedélyezd a kamerát, majd lőj egy képet.</p>
+            </div>
+            <span id="selfieStatus">kötelező</span>
+          </div>
+
+          <video id="video" autoplay playsinline muted></video>
+          <canvas id="canvas"></canvas>
+          <img id="selfiePreview" alt="Szelfi előnézet" />
+
+          <div class="buttons">
+            <button type="button" id="startCamera">Kamera indítása</button>
+            <button type="button" id="takeSelfie" class="secondary" disabled>Szelfi lövése</button>
+            <button type="button" id="retakeSelfie" class="ghost" disabled>Új szelfi</button>
+          </div>
+        </div>
+
+        <label class="checkbox">
+          <input id="consent" type="checkbox" required />
+          <span>Hozzájárulok, hogy Kiara a megadott adatokat és a szelfit a jelentkezés elbírálásához kezelje.</span>
+        </label>
+
+        <button class="submit" type="submit">Jelentkezés beküldése</button>
+        <p class="setupNote">EmailJS beállítás szükséges a <code>script.js</code> elején.</p>
+      </form>
+    </section>
+
+    <section class="card result hidden" id="resultCard">
+      <div class="heart">♥</div>
+      <p class="muted uppercase">Kiértékelés</p>
+      <h2><span id="scoreResult">0</span>% esély</h2>
+      <div class="bar"><div id="scoreBar"></div></div>
+      <p id="verdict"></p>
+      <img id="resultSelfie" alt="Beküldött szelfi" />
+      <button id="newApplication" class="ghost">Új jelentkezés</button>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
